@@ -1,0 +1,217 @@
+/* ─── Table Container ────────────────────────────────────────── */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* ─── Table ──────────────────────────────────────────────────── */
+.customer-table {
+  width: 100%;
+  min-width: 860px;
+  border-collapse: collapse;
+}
+
+/* ─── Head ───────────────────────────────────────────────────── */
+.customer-table thead {
+  background: #F9FAFB;
+}
+
+.customer-table th {
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
+  text-align: left;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* ─── Body ───────────────────────────────────────────────────── */
+.customer-table td {
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+  font-size: 13.5px;
+  vertical-align: middle;
+  line-height: 1.4;
+}
+
+.customer-table tbody tr {
+  transition: background 0.12s ease;
+}
+
+.customer-table tbody tr:hover {
+  background: var(--surface-hover);
+}
+
+.customer-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* ID column */
+.customer-table td:first-child {
+  width: 52px;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Customer Name Cell ─────────────────────────────────────── */
+.customer-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 160px;
+}
+
+.customer-name span {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 13.5px;
+}
+
+/* Avatar palette — cycles through 6 colors by index */
+.avatar {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-md);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.avatar-0 { background: rgba(79,111,212,0.12); color: #4F6FD4; }
+.avatar-1 { background: rgba(16,185,129,0.12); color: #059669; }
+.avatar-2 { background: rgba(245,158,11,0.14); color: #D97706; }
+.avatar-3 { background: rgba(139,92,246,0.12); color: #7C3AED; }
+.avatar-4 { background: rgba(239,68,68,0.10);  color: #DC2626; }
+.avatar-5 { background: rgba(6,182,212,0.12);  color: #0891B2; }
+
+/* ─── Contact Info ───────────────────────────────────────────── */
+.cell-phone {
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.cell-email {
+  color: var(--accent);
+  font-size: 13px;
+}
+
+.cell-address {
+  color: var(--text-secondary);
+  font-size: 12.5px;
+  max-width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cell-date {
+  color: var(--text-secondary);
+  font-size: 12.5px;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Action Buttons ─────────────────────────────────────────── */
+.action-buttons {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.edit-btn,
+.delete-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 11px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.14s ease, color 0.14s ease, border-color 0.14s ease, box-shadow 0.14s ease;
+  white-space: nowrap;
+}
+
+.edit-btn svg,
+.delete-btn svg {
+  width: 13px;
+  height: 13px;
+  stroke-width: 2;
+  flex-shrink: 0;
+}
+
+.edit-btn {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-secondary);
+}
+
+.edit-btn:hover {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+.delete-btn {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+}
+
+.delete-btn:hover {
+  border-color: rgba(239,68,68,0.3);
+  background: var(--danger-light);
+  color: var(--danger);
+}
+
+/* ─── Empty State ────────────────────────────────────────────── */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.empty-state-icon {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.empty-state-icon svg {
+  width: 26px;
+  height: 26px;
+  stroke-width: 1.5;
+}
+
+.empty-state h3 {
+  color: var(--text-primary);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.empty-state p {
+  color: var(--text-muted);
+  font-size: 13px;
+}
