@@ -66,7 +66,7 @@ const navItems = [
   },
 ];
 
-function Sidebar({ collapsed }) {
+function Sidebar({ collapsed , activeTab, setActiveTab }) {
   return (
     <aside className={`sidebar${collapsed ? " sidebar--collapsed" : ""}`}>
 
@@ -87,8 +87,12 @@ function Sidebar({ collapsed }) {
           {navItems.map(({ icon, label }) => (
             <a
               href="#"
-              className={label === "Customers" ? "active" : ""}
+              className={activeTab === label ? "active" : ""}
               key={label}
+              onClick={(e) => {
+                e.preventDefault();
+                setActiveTab(label);
+              }}
               title={collapsed ? label : undefined}
             >
               <span className="nav-icon-wrap">{icon}</span>
