@@ -1,4 +1,51 @@
-function Vehicle(){
+import { useEffect, useState } from "react";
+import api from "../../services/CustomerServices";
+import VehicleTable from "./VehicleTable";
+import AddVehicleForm from "./AddVehicleForm";
+
+function Vehicle(){ 
+  const [editingVehicle, setEditingVehicle] = useState(null);
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [vehicle , setVehicle] = useState([])
+  const [loading , setLoading] = useState(true)
+  const [errors , setErrors] = useState(null)
+  const [query , setQuery] = useState("")
+
+  const filteredVehicles = vehicle.filter((veh) => {
+    const searchTerm = query.toLowerCase().trim();
+    if (!searchTerm) return true;
+
+    const customerNameMatch = veh.customer_name?.toLowerCase().includes(searchTerm);
+    const vehicleNumberMatch = veh.vehicle_number?.toLowerCase().includes(searchTerm);
+    const typeMatch = veh.vehicle_type?.toLowerCase().includes(searchTerm);
+    const modelMatch = veh.model?.toLowerCase().includes(searchTerm);
+    const brandMatch = veh.brand?.toLowerCase().includes(searchTerm);
+
+    return customerNameMatch || typeMatch || modelMatch || brandMatch || vehicleNumberMatch ;
+  })
+  useEffect(() => {
+    api.get("vehicles/")
+      .then((response) => {
+        // console.log(response.data)
+        setVehicle(response.data);
+        setLoading(false)
+      })
+      .catch((err) => {
+        console.error("API Error:", err);
+        setErrors("Could not fetch data!");
+        setLoading(false);
+      });
+  }, []);
+
+  // const handleEditClick = () => {
+  //   setEditingCustomer(customer);
+  //   setIsFormOpen(true);
+  // };
+
+  const handleCloseForm = () => {
+    setIsFormOpen(false);
+  };
+
   return (
     
     <section className="vehicle-page">
@@ -9,7 +56,7 @@ function Vehicle(){
           <p className="page-header-desc">Manage your AutoCare vehicle information in one place.</p>
         </div>
 
-        <button className="add-btn" >
+        <button className="add-btn" onClick={() => setIsFormOpen(true)}>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
             <line x1="12" y1="5" x2="12" y2="19" />
             <line x1="5" y1="12" x2="19" y2="12" />
@@ -31,11 +78,49 @@ function Vehicle(){
               type="text"
               placeholder="Search "
               name="search"
+              onChange={(e) => setQuery(e.target.value)}
             />
           </div>
           <span className="customer-count">
+            {filteredVehicles.length} of {vehicle.length} 
           </span>
         </div>
+        {/* Loading Feedback */}
+        {loading && (
+          <div className="status-card status-loading">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+            </svg>
+            <span>Loading customers...</span>
+          </div>
+        )}
+
+        {/* Error Feedback */}
+        {errors && (
+          <div className="status-card status-error">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+            <span>{errors}</span>
+          </div>
+        )}
+
+        {!loading && !errors && (
+          <VehicleTable vehicles = {filteredVehicles}/>
+        )}
+
+        {/* Form Modal */}
+        {isFormOpen && (
+          <AddVehicleForm
+            onClose={handleCloseForm}
+            // onSave={handleSaveCustomer}
+            // initialData={editingCustomer}
+          />
+        )}
+        
+
       </div>
     </section>
   

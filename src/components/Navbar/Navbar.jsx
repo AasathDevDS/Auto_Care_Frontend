@@ -1,6 +1,6 @@
 import "./Navbar.css";
 
-function Navbar({ onToggleSidebar }) {
+function Navbar({ onToggleSidebar , activeTab}) {
   return (
     <header className="topbar">
       <div className="topbar-left">
@@ -20,7 +20,7 @@ function Navbar({ onToggleSidebar }) {
         <div className="topbar-breadcrumb">
           <span className="topbar-eyebrow">Service Management</span>
           <span className="breadcrumb-sep">/</span>
-          <span className="topbar-page-title">Customer Workspace</span>
+          <span className="topbar-page-title">{activeTab} Workspace</span>
         </div>
       </div>
 

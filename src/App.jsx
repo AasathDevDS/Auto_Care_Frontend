@@ -17,7 +17,10 @@ function App() {
       setActiveTab={setActiveTab} />
 
       <div className="main-area">
-        <Navbar onToggleSidebar={() => setSidebarCollapsed((prev) => !prev)} />
+        <Navbar 
+        onToggleSidebar={() => setSidebarCollapsed((prev) => !prev)} 
+        activeTab={activeTab}
+        />
         <main className="content">
           {activeTab === "Customers" && <Customer />}
           {activeTab === "Vehicles" && <Vehicle />}
