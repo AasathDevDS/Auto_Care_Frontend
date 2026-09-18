@@ -135,7 +135,8 @@
 }
 
 .form-field input,
-.form-field textarea {
+.form-field textarea,
+.form-field select {
   width: 100%;
   padding: 10px 13px;
   border: 1px solid var(--border);

@@ -37,10 +37,31 @@ function Vehicle(){
       });
   }, []);
 
-  // const handleEditClick = () => {
-  //   setEditingCustomer(customer);
-  //   setIsFormOpen(true);
-  // };
+  
+  const handleEditClick = (vehicle) => {
+    console.log(vehicle);
+    setEditingVehicle(vehicle);
+    setIsFormOpen(true);
+  };
+  const handleDelete = async (id) => {    
+    if (!window.confirm("Are you sure you want to delete this veicle?")) return;
+
+    try {
+      await api.delete(`vehicles/${id}/`);
+      setCustomers((prevVehicles) => prevVehicles.filter((v) => v.id !== id));
+    } catch (err) {
+      console.error("Error deleting customer:", err.response?.data || err.message);
+      alert("Failed to delete vehicle.");
+    }
+  }
+
+  const handleSaveVehicle = async (vehicleData) => {
+    //POST DATA
+    // console.log(vehicleData);
+    const response = await api.post("vehicles/" , vehicleData);
+    setVehicle((preValue) => [...preValue , response.data]);
+    setIsFormOpen(false);
+  }
 
   const handleCloseForm = () => {
     setIsFormOpen(false);
@@ -108,15 +129,18 @@ function Vehicle(){
         )}
 
         {!loading && !errors && (
-          <VehicleTable vehicles = {filteredVehicles}/>
+          <VehicleTable 
+          vehicles = {filteredVehicles}
+          onDelete={handleDelete}
+          onEdit = {handleEditClick}/>
         )}
 
         {/* Form Modal */}
         {isFormOpen && (
           <AddVehicleForm
             onClose={handleCloseForm}
-            // onSave={handleSaveCustomer}
-            // initialData={editingCustomer}
+            onSave={handleSaveVehicle}
+            initialData={editingVehicle}
           />
         )}
         

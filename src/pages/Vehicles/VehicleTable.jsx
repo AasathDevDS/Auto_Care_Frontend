@@ -1,7 +1,7 @@
 const AVATAR_COLORS = 6;
 
 // 1. onEdit prop-ஐ destructure செய்கிறோம்
-function VehicleTable({ vehicles }) {
+function VehicleTable({ vehicles , onDelete , onEdit}) {
   // console.log(vehicles);
 
   if (vehicles.length === 0) {
@@ -72,7 +72,7 @@ function VehicleTable({ vehicles }) {
                   <button
                     type="button"
                     className="edit-btn"
-                    // onClick={() => onEdit(customer)}
+                    onClick={() => onEdit(vehicle)}
                   >
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
                       <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
@@ -85,7 +85,7 @@ function VehicleTable({ vehicles }) {
                   <button
                     type="button"
                     className="delete-btn"
-                    // onClick={() => onDelete(customer.id)}
+                    onClick={() => onDelete(vehicle.id)}
                   >
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
                       <polyline points="3 6 5 6 21 6" />

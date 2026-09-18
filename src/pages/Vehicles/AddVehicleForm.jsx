@@ -1,10 +1,70 @@
+import { useEffect, useState } from "react";
+import api from "../../services/CustomerServices";
 
-function AddVehicleForm({onClose}){
-  const isEditMode = true;
+function AddVehicleForm({onClose , onSave , initialData}){
+  const isEditMode = Boolean(initialData);
+  const [customers , setCustomers] = useState([]);
+  const [error , setError] = useState(null);
+  const [formData, setFormData] = useState({
+    customer: initialData?.customer || "", // Backend Foreign Key ID
+    vehicle_number: initialData?.vehicle_number || "",
+    current_mileage: initialData?.current_mileage || "",
+    brand: initialData?.brand || "",
+    model: initialData?.model || "",
+    vehicle_type: initialData?.vehicle_type || "",
+    year: initialData?.year || "",
+  });
+  const [loading, setLoading] = useState(true);
 
-  function handleChange(e){
-    console.log(e.target.value);
+  useEffect(() => {
+    if (initialData) {
+      setFormData({
+    customer: initialData?.customer || "",
+    vehicle_number: initialData?.vehicle_number || "",
+    current_mileage: initialData?.current_mileage || "",
+    brand: initialData?.brand || "",
+    model: initialData?.model || "",
+    vehicle_type: initialData?.vehicle_type || "",
+    year: initialData?.year || "",
+      });
+    }
+  }, [initialData]);
+  
+
+  useEffect(() => {
+    api.get("customers/")
+      .then((response) => {
+        setCustomers(response.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("API Error:", err);
+        setError("Could not fetch data!");
+        setLoading(false);
+      });
+  }, []);
+
+  function handleChange(e) {
+    const {name , value} = e.target;
+    setFormData((preValue) => ({
+      ...preValue,
+      [name]:value,
+    }))
+  }
+
+  function handleSubmit(e) {
+  e.preventDefault();
+
+  const payload = {
+    ...formData,
+    customer: Number(formData.customer),
+    current_mileage: formData.current_mileage ? Number(formData.current_mileage) : null,
+    vehicle_type : formData.vehicle_type.toUpperCase(),
+    year: formData.year ? Number(formData.year) : null,
   };
+
+  onSave(payload);
+}
 
   return (
     <div className="form-overlay">
@@ -31,11 +91,11 @@ function AddVehicleForm({onClose}){
             </div>
             <div>
               {/* Dynamic Heading & Description */}
-              <h2>{isEditMode ? "Edit Customer" : "Add Customer"}</h2>
+              <h2>{isEditMode ? "Edit Vehicle" : "Add Vehicle"}</h2>
               <p>
                 {isEditMode
-                  ? "Update the details of this customer."
-                  : "Fill in the details to register a new customer."}
+                  ? "Update the details of this vehicle."
+                  : "Fill in the details to register a new vehicle."}
               </p>
             </div>
           </div>
@@ -54,19 +114,26 @@ function AddVehicleForm({onClose}){
         </div>
 
         {/* Form Fields */}
-        <form >
+        <form onSubmit={handleSubmit}>
           <div className="form-body">
             <div className="form-field">
-              <label htmlFor="customer-name">
+              <label htmlFor="customer-select">
                 Customer Name <span>*</span>
               </label>
-              <input
-                id="customer-name"
-                type="text"
-                placeholder="e.g. Ahmed Ali"
-                name="name"
+              <select
+                id="customer-select"
+                name="customer"
+                value={formData.customer}
+                onChange={handleChange}
                 required
-              />
+              >
+                <option value="">-- Select Customer --</option>
+                {customers.map((cust) => (
+                  <option key={cust.id} value={cust.id}>
+                    {cust.name}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className="form-field">
@@ -77,9 +144,10 @@ function AddVehicleForm({onClose}){
                 id="vehicle-number"
                 type="text"
                 placeholder="e.g. BCC-8430"
-                name="vehicleNumber"
+                name="vehicle_number"
+                value={formData.vehicle_number}
+                onChange={handleChange}
                 required
-              
               />
             </div>
 
@@ -89,8 +157,9 @@ function AddVehicleForm({onClose}){
                 id="vehicle-mileage"
                 type="number"
                 placeholder="e.g. 19800"
-                name="mileage"
-           
+                name="current_mileage"
+                value={formData.current_mileage}
+                onChange={handleChange}
               />
             </div>
 
@@ -100,7 +169,8 @@ function AddVehicleForm({onClose}){
                 id="vehicle-brand"
                 placeholder="Honda"
                 name="brand"
-         
+                value={formData.brand}
+                onChange={handleChange}
               />
             </div>
             <div className="form-field">
@@ -109,18 +179,26 @@ function AddVehicleForm({onClose}){
                 id="vehicle-model"
                 placeholder="Grace"
                 name="model"
-         
+                value={formData.model}
+                onChange={handleChange}
               />
             </div>
             <div className="form-field">
-              <label htmlFor="customer-address">Vehicle Type</label>
-              <input
+              <label htmlFor="vehicle-type">Vehicle Type</label>
+              <select
                 id="vehicle-type"
-                placeholder="Car"
-                name="type"
-         
-              />
-            </div>
+                name="vehicle_type"
+                value={formData.vehicle_type}
+                onChange={handleChange}
+                required>
+                <option value="">-- Select Vehicle Type --</option>
+                <option value="CAR">Car</option>
+                <option value="VAN">Van</option>
+                <option value="MOTORCYCLE">Motorcycle</option>
+                <option value="THREE_WHEELER">Three Wheeler</option>
+                <option value="SUV">SUV</option>
+              </select>
+          </div>
             <div className="form-field">
               <label htmlFor="customer-address">Model Year</label>
               <input
@@ -128,6 +206,8 @@ function AddVehicleForm({onClose}){
                 id="year"
                 placeholder="2019"
                 name="year"
+                value={formData.year}
+                onChange={handleChange}
               />
             </div>
           </div>

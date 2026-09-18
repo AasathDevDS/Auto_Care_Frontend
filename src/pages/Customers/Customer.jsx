@@ -50,6 +50,7 @@ function Customer() {
         );
       } else {
         // CREATE (POST)
+        console.log(formData);
         const response = await api.post("customers/", formData);
         setCustomers((prev) => [...prev, response.data]);
       }
