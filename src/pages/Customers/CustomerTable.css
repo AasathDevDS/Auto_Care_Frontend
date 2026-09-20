@@ -132,7 +132,8 @@
 }
 
 .edit-btn,
-.delete-btn {
+.delete-btn,
+.view-btn {
   display: inline-flex;
   align-items: center;
   gap: 5px;
@@ -146,12 +147,25 @@
 }
 
 .edit-btn svg,
-.delete-btn svg {
+.delete-btn svg,
+.view-btn svg {
   width: 13px;
   height: 13px;
   stroke-width: 2;
   flex-shrink: 0;
 }
+.view-btn {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-secondary);
+}
+
+.view-btn:hover {
+  border-color: rgba(59, 130, 246, 0.4);
+  background: rgba(59, 130, 246, 0.08); /* அல்லது var(--info-light) */
+  color: #3b82f6; /* அல்லது var(--info) */
+}
+
 
 .edit-btn {
   border: 1px solid var(--border);

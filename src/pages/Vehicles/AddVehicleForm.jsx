@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import api from "../../services/CustomerServices";
+import api from "../../services/AxiosURL";
 
 function AddVehicleForm({onClose , onSave , initialData}){
   const isEditMode = Boolean(initialData);

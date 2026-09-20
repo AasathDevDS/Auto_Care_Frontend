@@ -1,5 +1,5 @@
 import CustomerTable from "./CustomerTable";
-import api from "../../services/CustomerServices";
+import api from "../../services/AxiosURL";
 import "./Customer.css";
 import { useEffect, useState } from "react";
 import AddCustomerForm from "./AddCustomerForm";
@@ -77,6 +77,7 @@ function Customer() {
 
   // 4. Modal Handlers
   const handleEditClick = (customer) => {
+    console.log(customer);
     setEditingCustomer(customer);
     setIsFormOpen(true);
   };

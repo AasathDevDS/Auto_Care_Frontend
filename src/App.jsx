@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Customer from "./pages/Customers/Customer";
 import Vehicle from "./pages/Vehicles/Vehicle";
+import Service from "./pages/Services/Service";
 import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
 import "./App.css";
@@ -24,6 +25,7 @@ function App() {
         <main className="content">
           {activeTab === "Customers" && <Customer />}
           {activeTab === "Vehicles" && <Vehicle />}
+          {activeTab === "Services" && <Service />}
         </main>
       </div>
     </div>

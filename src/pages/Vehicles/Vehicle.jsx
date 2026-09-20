@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import api from "../../services/CustomerServices";
+import api from "../../services/AxiosURL";
 import VehicleTable from "./VehicleTable";
 import AddVehicleForm from "./AddVehicleForm";
 
