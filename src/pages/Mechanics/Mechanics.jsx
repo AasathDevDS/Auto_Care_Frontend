@@ -37,7 +37,7 @@ function Mechanics(){
   
 
   return (
-  <section className="customer-page">
+  <section className="module-page">
       <div className="page-header">
         <div className="page-header-text">
           <span className="section-tag">Mechnics directory</span>
@@ -54,7 +54,7 @@ function Mechanics(){
         </button>
       </div>
 
-      <div className="customer-panel">
+      <div className="module-panel">
         <div className="table-toolbar">
           <div className="search-box">
             <span className="search-icon">
@@ -69,7 +69,7 @@ function Mechanics(){
               name="search"
             />
           </div>
-          <span className="customer-count">
+          <span className="record-count">
              {mechanics.length} Mechanics
           </span>
         </div>

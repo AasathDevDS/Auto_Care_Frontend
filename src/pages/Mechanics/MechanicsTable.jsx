@@ -3,9 +3,8 @@ const AVATAR_COLORS = 6;
 // 1. onEdit prop-ஐ destructure செய்கிறோம்
 function MechanicTable({mechanics}) {
   const getStatusBadge = (is_available) => {
-    const a = is_available;    
-    if (a === true) return "badge-success";
-    if (a === false) return "badge-warning";
+    if (is_available === true)  return "badge-success";
+    return "badge-unavailable";
   };
 
   if (mechanics.length === 0) {
@@ -27,14 +26,14 @@ function MechanicTable({mechanics}) {
 
   return (
     <div className="table-container">
-      <table className="customer-table">
+      <table className="data-table">
         <thead>
           <tr>
             <th>ID</th>
             <th>Name</th>
             <th>Phone</th>
             <th>Specialization</th>
-            <th>Is Availabe</th>
+            <th>Availability</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -45,7 +44,7 @@ function MechanicTable({mechanics}) {
               <td>{mechanic.id}</td>
 
               <td>
-                <div className="customer-name">
+                <div className="row-name-cell">
                   <div className={`avatar avatar-${index % AVATAR_COLORS}`}>
                     {mechanic.name ? mechanic.name.charAt(0).toUpperCase() : "?"}
                   </div>
@@ -54,8 +53,12 @@ function MechanicTable({mechanics}) {
               </td>
 
               <td className="cell-phone">{mechanic.phone}</td>
-              <td className="cell-email">{mechanic.specialization || "-"}</td>
-              <td className={`status-pill ${getStatusBadge(mechanic.is_available)}`}>{mechanic.is_available ? "Available":"Unavailable"}</td>
+              <td className="cell-text">{mechanic.specialization || "-"}</td>
+              <td>
+                <span className={`status-pill ${getStatusBadge(mechanic.is_available)}`}>
+                  {mechanic.is_available ? "Available" : "Unavailable"}
+                </span>
+              </td>
 
               {/* <td className="cell-date">
                 {customer.created_at

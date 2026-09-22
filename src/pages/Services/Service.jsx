@@ -113,7 +113,7 @@ function Service() {
   });
 
   return (
-    <section className="customer-page">
+    <section className="module-page">
       {/* Page Header */}
       <div className="page-header">
         <div className="page-header-text">
@@ -131,7 +131,7 @@ function Service() {
         </button>
       </div>
 
-      <div className="customer-panel">
+      <div className="module-panel">
         {/* Table Toolbar */}
         <div className="table-toolbar">
           <div className="search-box">
@@ -149,7 +149,7 @@ function Service() {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
-          <span className="customer-count">
+          <span className="record-count">
             {filteredServices.length} of {services.length} services
           </span>
         </div>

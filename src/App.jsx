@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Mechanics from "./pages/Mechanics/Mechanics";
 import "./App.css";
+import "./styles/shared.css";
 
 function App() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);

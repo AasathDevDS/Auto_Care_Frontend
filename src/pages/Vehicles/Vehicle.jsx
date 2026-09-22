@@ -69,7 +69,7 @@ function Vehicle(){
 
   return (
     
-    <section className="vehicle-page">
+    <section className="module-page">
       <div className="page-header">
         <div className="page-header-text">
           <span className="section-tag">Vehicle directory</span>
@@ -86,7 +86,7 @@ function Vehicle(){
         </button>
       </div>
 
-      <div className="vehicle-panel">
+      <div className="module-panel">
         <div className="table-toolbar">
           <div className="search-box">
             <span className="search-icon">
@@ -102,7 +102,7 @@ function Vehicle(){
               onChange={(e) => setQuery(e.target.value)}
             />
           </div>
-          <span className="customer-count">
+          <span className="record-count">
             {filteredVehicles.length} of {vehicle.length} 
           </span>
         </div>

@@ -24,7 +24,7 @@ function CustomerTable({ customers, onDelete, onEdit }) {
 
   return (
     <div className="table-container">
-      <table className="customer-table">
+      <table className="data-table">
         <thead>
           <tr>
             <th>ID</th>
@@ -43,7 +43,7 @@ function CustomerTable({ customers, onDelete, onEdit }) {
               <td>{customer.id}</td>
 
               <td>
-                <div className="customer-name">
+                <div className="row-name-cell">
                   <div className={`avatar avatar-${index % AVATAR_COLORS}`}>
                     {customer.name ? customer.name.charAt(0).toUpperCase() : "?"}
                   </div>

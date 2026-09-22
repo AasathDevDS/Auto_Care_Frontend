@@ -24,7 +24,7 @@ function ServiceDetailsView({ service, onClose , onEdit }) {
 
   return (
     <div className="form-overlay">
-      <div className="customer-form service-details-modal">
+      <div className="modal-card service-details-modal">
         {/* Modal Header */}
         <div className="form-header">
           <div className="form-header-left">

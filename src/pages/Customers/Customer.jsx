@@ -87,7 +87,7 @@ function Customer() {
   };
 
   return (
-    <section className="customer-page">
+    <section className="module-page">
       <div className="page-header">
         <div className="page-header-text">
           <span className="section-tag">Customer directory</span>
@@ -104,7 +104,7 @@ function Customer() {
         </button>
       </div>
 
-      <div className="customer-panel">
+      <div className="module-panel">
         <div className="table-toolbar">
           <div className="search-box">
             <span className="search-icon">
@@ -121,7 +121,7 @@ function Customer() {
               onChange={(e) => setQuery(e.target.value)}
             />
           </div>
-          <span className="customer-count">
+          <span className="record-count">
             {filteredCustomers.length} of {customers.length} customers
           </span>
         </div>

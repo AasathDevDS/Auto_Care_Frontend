@@ -85,7 +85,7 @@ function AddServiceForm({ onClose, onSave, initialData }) {
 
   return (
     <div className="form-overlay">
-      <div className="customer-form" style={{ maxWidth: "560px" }}>
+      <div className="modal-card modal-card--wide">
         {/* Modal Header */}
         <div className="form-header">
           <div className="form-header-left">
@@ -131,7 +131,7 @@ function AddServiceForm({ onClose, onSave, initialData }) {
 
         {/* Form Fields */}
         <form onSubmit={handleSubmit}>
-          <div className="form-body" style={{ maxHeight: "70vh", overflowY: "auto" }}>
+          <div className="form-body form-body--scrollable">
             
             {/* Vehicle Dropdown */}
             <div className="form-field">
@@ -155,7 +155,7 @@ function AddServiceForm({ onClose, onSave, initialData }) {
             </div>
 
             {/* Service Type & Status */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+            <div className="form-grid-2">
               <div className="form-field">
                 <label htmlFor="service-type">Service Type <span>*</span></label>
                 <select
@@ -204,7 +204,7 @@ function AddServiceForm({ onClose, onSave, initialData }) {
             </div>
 
             {/* Costs */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+            <div className="form-grid-2">
               <div className="form-field">
                 <label htmlFor="service-est-cost">Estimated Cost (LKR) <span>*</span></label>
                 <input
@@ -232,7 +232,7 @@ function AddServiceForm({ onClose, onSave, initialData }) {
             </div>
 
             {/* Mileage & Mechanic */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+            <div className="form-grid-2">
               <div className="form-field">
                 <label htmlFor="service-mileage">Mileage at Service (km)</label>
                 <input
@@ -285,7 +285,7 @@ function AddServiceForm({ onClose, onSave, initialData }) {
                 name="notes"
                 value={formData.notes}
                 onChange={handleChange}
-                style={{ minHeight: "65px" }}
+                className="textarea--sm"
               />
             </div>
           </div>

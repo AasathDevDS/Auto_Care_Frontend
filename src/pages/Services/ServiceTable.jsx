@@ -19,14 +19,26 @@ function ServiceTable({services , onEyeView , onDelete , onEdit}){
   }
   const getStatusBadge = (status) => {
     const s = status?.toUpperCase();
-    if (s === "COMPLETED") return "badge-success";
+    if (s === "COMPLETED")  return "badge-success";
     if (s === "IN_PROGRESS") return "badge-warning";
+    if (s === "CANCELLED")  return "badge-cancelled";
     return "badge-pending";
+  };
+
+  /* Display-only helper — converts raw API enum to human-readable label */
+  const formatStatus = (status) => {
+    const labels = {
+      PENDING:     "Pending",
+      IN_PROGRESS: "In Progress",
+      COMPLETED:   "Completed",
+      CANCELLED:   "Cancelled",
+    };
+    return labels[status?.toUpperCase()] ?? (status || "-");
   };
 
   return (
     <div className="table-container">
-      <table className="customer-table">
+      <table className="data-table">
         <thead>
           <tr>
             <th>ID</th>
@@ -45,7 +57,7 @@ function ServiceTable({services , onEyeView , onDelete , onEdit}){
               <td>{service.id}</td>
 
               <td>
-                <div className="customer-name">
+                <div className="row-name-cell">
                   <div className={`avatar avatar-${index % AVATAR_COLORS}`}>
                     {service.vehicle_number ? service.vehicle_number.charAt(0).toUpperCase() : "?"}
                   </div>
@@ -54,8 +66,12 @@ function ServiceTable({services , onEyeView , onDelete , onEdit}){
               </td>
 
               <td className="cell-phone">{service.actual_cost || "-"}</td>
-              <td className="cell-email">{service.service_type|| "-"}</td>
-              <td className={`status-pill ${getStatusBadge(service.status)}`}>{service.status|| "-"}</td>
+              <td className="cell-text">{service.service_type || "-"}</td>
+              <td>
+                <span className={`status-pill ${getStatusBadge(service.status)}`}>
+                  {formatStatus(service.status)}
+                </span>
+              </td>
 
               <td className="cell-date">
                 {service.service_date

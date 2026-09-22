@@ -1,113 +1,21 @@
-/* ─── Overlay ────────────────────────────────────────────────── */
-.form-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(15, 23, 42, 0.55);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  padding: 20px;
-  animation: overlay-in 0.18s ease;
-}
+/* ─── ServiceDetailView — Module-Specific Styles ─────────────── */
+/*
+ * All shared modal styles (form-overlay, modal-card, form-header,
+ * form-close-btn, form-footer, btn-cancel, btn-submit, status-pill,
+ * badge-*, keyframes) have been moved to:
+ *   src/styles/shared.css  (imported globally via App.jsx)
+ *
+ * This file retains only the styles unique to the details view.
+ */
 
-@keyframes overlay-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-/* ─── Details Modal Card ─────────────────────────────────────── */
+/* ─── Wider Modal Modifier ───────────────────────────────────── */
+/* Overrides the default modal-card max-width for the details view */
 .service-details-modal {
-  width: 100%;
-  max-width: 580px; /* Details card-க்கு போதுமான இடம் */
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-xl);
-  overflow: hidden;
-  animation: modal-in 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-@keyframes modal-in {
-  from { opacity: 0; transform: scale(0.95) translateY(8px); }
-  to   { opacity: 1; transform: scale(1) translateY(0); }
-}
-
-/* ─── Modal Header ───────────────────────────────────────────── */
-.form-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px 24px 16px;
-  border-bottom: 1px solid var(--border);
-}
-
-.form-header-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.form-header-icon {
-  width: 38px;
-  height: 38px;
-  display: grid;
-  place-items: center;
-  border-radius: var(--radius-md);
-  background: var(--accent-light);
-  color: var(--accent);
-  flex-shrink: 0;
-}
-
-.form-header-icon svg {
-  width: 18px;
-  height: 18px;
-  stroke-width: 2;
-}
-
-.form-header-left h2 {
-  color: var(--text-primary);
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.form-header-left p {
-  color: var(--text-muted);
-  font-size: 12px;
-  font-weight: 400;
-  margin-top: 2px;
-}
-
-.form-close-btn {
-  width: 32px;
-  height: 32px;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  background: transparent;
-  color: var(--text-muted);
-  cursor: pointer;
-  flex-shrink: 0;
-  transition: background 0.14s ease, color 0.14s ease, border-color 0.14s ease;
-}
-
-.form-close-btn:hover {
-  background: var(--danger-light);
-  border-color: rgba(239, 68, 68, 0.25);
-  color: var(--danger);
-}
-
-.form-close-btn svg {
-  width: 14px;
-  height: 14px;
-  stroke-width: 2;
+  max-width: 580px;
 }
 
 /* ─── Details Body ───────────────────────────────────────────── */
+/* Extends .form-body with a max-height + scroll for long content */
 .details-body {
   padding: 20px 24px;
   display: flex;
@@ -117,15 +25,9 @@
   overflow-y: auto;
 }
 
-/* Custom Scrollbar for Details Body */
-.details-body::-webkit-scrollbar {
-  width: 5px;
-}
-
-.details-body::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 4px;
-}
+/* Custom scrollbar for the details body */
+.details-body::-webkit-scrollbar        { width: 5px; }
+.details-body::-webkit-scrollbar-thumb  { background: var(--border); border-radius: 4px; }
 
 /* ─── Detail Rows & Grid ─────────────────────────────────────── */
 .detail-row {
@@ -182,95 +84,5 @@
   font-size: 13px;
   line-height: 1.55;
   color: var(--text-secondary);
-  white-space: pre-line; /* \r\n line breaks-ஐ அழகாகக் காட்டும் */
-}
-
-/* ─── Status Badges ──────────────────────────────────────────── */
-.status-pill {
-  display: inline-flex;
-  align-items: center;
-  width: fit-content;
-  padding: 2px 9px;
-  border-radius: var(--radius-sm);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
-
-.badge-pending {
-  background: #FEF3C7;
-  color: #D97706;
-  border: 1px solid rgba(217, 119, 6, 0.2);
-}
-
-.badge-warning {
-  background: #E0E7FF;
-  color: #4338CA;
-  border: 1px solid rgba(67, 56, 202, 0.2);
-}
-
-.badge-success {
-  background: #DCFCE7;
-  color: #15803D;
-  border: 1px solid rgba(21, 128, 61, 0.2);
-}
-
-/* ─── Footer / Actions ───────────────────────────────────────── */
-.form-footer {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 8px;
-  padding: 16px 24px;
-  border-top: 1px solid var(--border);
-  background: #FAFAFA;
-}
-
-.btn-cancel {
-  padding: 9px 16px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background: var(--surface);
-  color: var(--text-secondary);
-  font-size: 13.5px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.14s ease, color 0.14s ease;
-}
-
-.btn-cancel:hover {
-  background: var(--border);
-  color: var(--text-primary);
-}
-
-.btn-submit {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 9px 18px;
-  border: none;
-  border-radius: var(--radius-md);
-  background: var(--accent);
-  color: #fff;
-  font-size: 13.5px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 2px 8px var(--accent-shadow);
-  transition: background 0.14s ease, box-shadow 0.14s ease, transform 0.14s ease;
-}
-
-.btn-submit:hover {
-  background: var(--accent-hover);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(79, 111, 212, 0.30);
-}
-
-.btn-submit:active {
-  transform: translateY(0);
-}
-
-.btn-submit svg {
-  width: 14px;
-  height: 14px;
-  stroke-width: 2.5;
+  white-space: pre-line;
 }

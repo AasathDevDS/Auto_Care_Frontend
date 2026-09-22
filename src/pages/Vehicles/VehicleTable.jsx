@@ -23,7 +23,7 @@ function VehicleTable({ vehicles , onDelete , onEdit}) {
 
   return (
     <div className="table-container">
-      <table className="customer-table">
+      <table className="data-table">
         <thead>
           <tr>
             <th>ID</th>
@@ -45,7 +45,7 @@ function VehicleTable({ vehicles , onDelete , onEdit}) {
               <td>{vehicle.id}</td>
 
               <td>
-                <div className="customer-name">
+                <div className="row-name-cell">
                   <div className={`avatar avatar-${index % AVATAR_COLORS}`}>
                     {vehicle.customer_name ? vehicle.customer_name.charAt(0).toUpperCase() : "?"}
                   </div>
@@ -54,17 +54,17 @@ function VehicleTable({ vehicles , onDelete , onEdit}) {
               </td>
 
               <td className="cell-phone">{vehicle.vehicle_number}</td>
-              <td className="cell-email">{vehicle.current_mileage || "-"}</td>
-              <td className="cell-address">{vehicle.brand || "-"}</td>
-              <td className="cell-address">{vehicle.model || "-"}</td>
+              <td className="cell-text">{vehicle.current_mileage || "-"}</td>
+              <td className="cell-text">{vehicle.brand || "-"}</td>
+              <td className="cell-text">{vehicle.model || "-"}</td>
 
               <td className="cell-date">
                 {vehicle.created_at
                   ? new Date(vehicle.created_at).toLocaleDateString()
                   : "-"}
               </td>
-              <td className="cell-address">{vehicle.vehicle_type || "-"}</td>
-              <td className="cell-address">{vehicle.year || "-"}</td>
+              <td className="cell-text">{vehicle.vehicle_type || "-"}</td>
+              <td className="cell-text">{vehicle.year || "-"}</td>
 
               <td>
                 <div className="action-buttons">

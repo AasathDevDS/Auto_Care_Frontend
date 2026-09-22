@@ -68,7 +68,7 @@ function AddVehicleForm({onClose , onSave , initialData}){
 
   return (
     <div className="form-overlay">
-      <div className="customer-form">
+      <div className="modal-card">
         {/* Modal Header */}
         <div className="form-header">
           <div className="form-header-left">
