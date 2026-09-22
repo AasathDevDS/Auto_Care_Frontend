@@ -77,7 +77,6 @@ function Customer() {
 
   // 4. Modal Handlers
   const handleEditClick = (customer) => {
-    console.log(customer);
     setEditingCustomer(customer);
     setIsFormOpen(true);
   };

@@ -1,6 +1,6 @@
 import "./ServiceDetailView.css"
 
-function ServiceDetailsView({ service, onClose }) {
+function ServiceDetailsView({ service, onClose , onEdit }) {
   if (!service) return null;
 
   // Status-க்கு தகுந்த Badge class (PENDING, COMPLETED, IN_PROGRESS)
@@ -138,13 +138,13 @@ function ServiceDetailsView({ service, onClose }) {
             Close
           </button>
 
-          {/* {onEdit && (
+          {onEdit && (
             <button
               type="button"
               className="btn-submit"
               onClick={() => {
                 onClose();
-                // onEdit(service);
+                onEdit(service);
               }}
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" xmlns="http://www.w3.org/2000/svg">
@@ -153,7 +153,7 @@ function ServiceDetailsView({ service, onClose }) {
               </svg>
               Edit Service
             </button>
-          )} */}
+          )}
         </div>
       </div>
     </div>
