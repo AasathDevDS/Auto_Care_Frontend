@@ -28,6 +28,14 @@ function Mechanics(){
     setIsFormOpen(false);
   }
 
+  const handleSaveMechanic = async (mechanic) => {
+    console.log(mechanic);
+    const response = await api.post("mechanics/", mechanic);
+    setMechanics((prev) => [...prev, response.data]);
+    
+  }
+  
+
   return (
   <section className="customer-page">
       <div className="page-header">
@@ -101,7 +109,7 @@ function Mechanics(){
         {isFormOpen && (
           <AddMechanic
             onClose={handleClose}
-            // onSave={handleSaveCustomer}
+            onSave={handleSaveMechanic}
             // initialData={editingCustomer}
           />
         )}

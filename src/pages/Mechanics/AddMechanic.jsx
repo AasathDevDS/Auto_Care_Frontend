@@ -1,14 +1,15 @@
+import { useState } from "react";
 
-function AddMechanic({onClose}) {
+function AddMechanic({onClose , onSave}) {
   // initialData இருந்தால் Edit mode (Boolean flag)
   const isEditMode = false;
 
-  // const [customer, setCustomer] = useState({
-  //   name: initialData?.name || "",
-  //   phone: initialData?.phone || "",
-  //   email: initialData?.email || "",
-  //   address: initialData?.address || "",
-  // });
+  const [mechanic, setMechanic] = useState({
+    name: "",
+    phone: "",
+    specialization: "",
+    is_available: "",
+  });
 
   // initialData மாறினால் form state-ஐ sync செய்ய (safety measure)
   // useEffect(() => {
@@ -25,7 +26,7 @@ function AddMechanic({onClose}) {
   // Input change handler
   function handleChange(event) {
     const { name, value } = event.target;
-    setCustomer((prevValue) => ({
+    setMechanic((prevValue) => ({
       ...prevValue,
       [name]: value,
     }));
@@ -34,8 +35,8 @@ function AddMechanic({onClose}) {
   // Form submit handler
   function handleSubmit(event) {
     event.preventDefault();
-    // Data-வை parent-க்கு அனுப்பி சேமிக்கிறோம்
-    onSave(customer);
+    onSave(mechanic);
+    
   }
 
   return (
@@ -86,7 +87,7 @@ function AddMechanic({onClose}) {
         </div>
 
         {/* Form Fields */}
-        <form >
+        <form onSubmit={handleSubmit}>
           <div className="form-body">
             <div className="form-field">
               <label htmlFor="customer-name">
@@ -97,6 +98,8 @@ function AddMechanic({onClose}) {
                 type="text"
                 placeholder="e.g. Ahmed Ali"
                 name="name"
+                value = {mechanic.name}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -106,31 +109,40 @@ function AddMechanic({onClose}) {
                 Phone Number <span>*</span>
               </label>
               <input
-                id="customer-phone"
+                id="mechanic-phone"
                 type="text"
                 placeholder="e.g. +94 77 123 4567"
                 name="phone"
+                value = {mechanic.phone}
+                onChange={handleChange}
                 required
               />
             </div>
 
             <div className="form-field">
-              <label htmlFor="customer-email">Email Address</label>
+              <label htmlFor="customer-email"></label>
               <input
-                id="customer-email"
-                type="email"
-                placeholder="e.g. ahmed@example.com"
-                name="email"
+                id="specialization"
+                type="text"
+                placeholder="e.g. Engine Work"
+                name="specialization"
+                value = {mechanic.specialization}
+                onChange={handleChange}
               />
             </div>
 
             <div className="form-field">
-              <label htmlFor="customer-address">Address</label>
-              <textarea
-                id="customer-address"
-                placeholder="Street, City, Province"
-                name="address"
-              />
+              <label htmlFor="customer-address">Availablity</label>
+              <select
+              id="customer-select"
+                name="is_available"
+                value={mechanic.is_available}
+                onChange={handleChange}
+                required>
+                  <option value="">-- Select Mechanic Availability --</option>
+                  <option value="True">Available</option>
+                  <option value="False">Unavailable</option>
+              </select>
             </div>
           </div>
 
