@@ -34,7 +34,6 @@
   padding: 13px 16px;
   border-bottom: 1px solid var(--border);
   color: var(--text-primary);
-  font-size: 13.5px;
   vertical-align: middle;
   line-height: 1.4;
 }
@@ -228,4 +227,15 @@
 .empty-state p {
   color: var(--text-muted);
   font-size: 13px;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 2px 9px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }

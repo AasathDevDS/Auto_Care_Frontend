@@ -17,6 +17,12 @@ function ServiceTable({services , onEyeView , onDelete , onEdit}){
       </div>
     );
   }
+  const getStatusBadge = (status) => {
+    const s = status?.toUpperCase();
+    if (s === "COMPLETED") return "badge-success";
+    if (s === "IN_PROGRESS") return "badge-warning";
+    return "badge-pending";
+  };
 
   return (
     <div className="table-container">
@@ -49,7 +55,7 @@ function ServiceTable({services , onEyeView , onDelete , onEdit}){
 
               <td className="cell-phone">{service.actual_cost || "-"}</td>
               <td className="cell-email">{service.service_type|| "-"}</td>
-              <td className="cell-address">{service.status|| "-"}</td>
+              <td className={`status-pill ${getStatusBadge(service.status)}`}>{service.status|| "-"}</td>
 
               <td className="cell-date">
                 {service.service_date

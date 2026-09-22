@@ -1,0 +1,104 @@
+const AVATAR_COLORS = 6;
+
+// 1. onEdit prop-ஐ destructure செய்கிறோம்
+function MechanicTable({mechanics}) {
+  const getStatusBadge = (is_available) => {
+    const a = is_available;    
+    if (a === true) return "badge-success";
+    if (a === false) return "badge-warning";
+  };
+
+  if (mechanics.length === 0) {
+    return (
+      <div className="empty-state">
+        <div className="empty-state-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+        </div>
+        <h3>No mechanics yet</h3>
+        <p>Add your first mechanic to get started.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="table-container">
+      <table className="customer-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Specialization</th>
+            <th>Is Availabe</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {mechanics.map((mechanic, index) => (
+            <tr key={mechanic.id}>
+              <td>{mechanic.id}</td>
+
+              <td>
+                <div className="customer-name">
+                  <div className={`avatar avatar-${index % AVATAR_COLORS}`}>
+                    {mechanic.name ? mechanic.name.charAt(0).toUpperCase() : "?"}
+                  </div>
+                  <span>{mechanic.name}</span>
+                </div>
+              </td>
+
+              <td className="cell-phone">{mechanic.phone}</td>
+              <td className="cell-email">{mechanic.specialization || "-"}</td>
+              <td className={`status-pill ${getStatusBadge(mechanic.is_available)}`}>{mechanic.is_available ? "Available":"Unavailable"}</td>
+
+              {/* <td className="cell-date">
+                {customer.created_at
+                  ? new Date(customer.created_at).toLocaleDateString()
+                  : "-"}
+              </td> */}
+
+              <td>
+                <div className="action-buttons">
+                  {/* 2. Edit button-ல் onEdit(customer) அழைக்கப்படுகிறது */}
+                  <button
+                    type="button"
+                    className="edit-btn"
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                    </svg>
+                    Edit
+                  </button>
+
+                  {/* 3. Delete button-ஐ நேரடியாக onDelete(customer.id) என அழைக்கலாம் */}
+                  <button
+                    type="button"
+                    className="delete-btn"
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <polyline points="3 6 5 6 21 6" />
+                      <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+                      <path d="M10 11v6" />
+                      <path d="M14 11v6" />
+                      <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
+                    </svg>
+                    Delete
+                  </button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+export default MechanicTable;

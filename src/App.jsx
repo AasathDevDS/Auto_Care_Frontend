@@ -4,6 +4,7 @@ import Vehicle from "./pages/Vehicles/Vehicle";
 import Service from "./pages/Services/Service";
 import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
+import Mechanics from "./pages/Mechanics/Mechanics";
 import "./App.css";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           {activeTab === "Customers" && <Customer />}
           {activeTab === "Vehicles" && <Vehicle />}
           {activeTab === "Services" && <Service />}
+          {activeTab === "Mechanics" && <Mechanics />}
         </main>
       </div>
     </div>
