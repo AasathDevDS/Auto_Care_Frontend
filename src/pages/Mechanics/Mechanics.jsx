@@ -7,8 +7,21 @@ import AddMechanic from "./AddMechanic";
 function Mechanics(){
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [mechanics , setMechanics] = useState([]);
+  const [editingMechanic , setEditingMechanic] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [query, setQuery] = useState("");
+
+  // Search filter
+  const filteredMechanics = mechanics.filter((mechanic) => {
+    const searchTerm = query.toLowerCase().trim();
+    if (!searchTerm) return true;
+
+    const nameMatch = mechanic.name?.toLowerCase().includes(searchTerm);
+    const phoneMatch = mechanic.phone?.toLowerCase().includes(searchTerm);
+    const specialMatch = mechanic.specialization?.toLowerCase().includes(searchTerm);
+
+    return nameMatch || phoneMatch || specialMatch; });
 
 
   useEffect(() => {
@@ -32,8 +45,26 @@ function Mechanics(){
     console.log(mechanic);
     const response = await api.post("mechanics/", mechanic);
     setMechanics((prev) => [...prev, response.data]);
+    setIsFormOpen(false);
     
+  };
+
+  const handleEditClick = (mechanic) => {
+    setEditingMechanic(mechanic);
+    setIsFormOpen(true);
   }
+
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this mechanic?")) return;
+
+    try {
+      await api.delete(`mechanics/${id}/`);
+      setMechanics((prevMechanics) => prevMechanics.filter((m) => m.id !== id));
+    } catch (err) {
+      console.error("Error deleting mechanic:", err.response?.data || err.message);
+      alert("Failed to delete mechanic.");
+    }
+  } 
   
 
   return (
@@ -67,10 +98,11 @@ function Mechanics(){
               type="text"
               placeholder="Search .... "
               name="search"
+              onChange={(e) => setQuery(e.target.value)}
             />
           </div>
           <span className="record-count">
-             {mechanics.length} Mechanics
+             {filteredMechanics.length} of {mechanics.length} Mechanics
           </span>
         </div>
 
@@ -99,9 +131,9 @@ function Mechanics(){
         {/* 1. onEdit prop-ஐ CustomerTable-க்கு இணைக்கிறோம் */}
         {!loading && !error && (
           <MechanicTable
-            mechanics={mechanics}
-            // onDelete={handleDelete}
-            // onEdit={handleEditClick}
+            mechanics={filteredMechanics}
+            onDelete={handleDelete}
+            onEdit={handleEditClick}
           />
         )}
 
@@ -110,7 +142,7 @@ function Mechanics(){
           <AddMechanic
             onClose={handleClose}
             onSave={handleSaveMechanic}
-            // initialData={editingCustomer}
+            initialData={editingMechanic}
           />
         )}
       </div>

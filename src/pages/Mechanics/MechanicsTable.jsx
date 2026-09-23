@@ -1,7 +1,7 @@
 const AVATAR_COLORS = 6;
 
 // 1. onEdit prop-ஐ destructure செய்கிறோம்
-function MechanicTable({mechanics}) {
+function MechanicTable({mechanics , onDelete , onEdit}) {
   const getStatusBadge = (is_available) => {
     if (is_available === true)  return "badge-success";
     return "badge-unavailable";
@@ -72,6 +72,7 @@ function MechanicTable({mechanics}) {
                   <button
                     type="button"
                     className="edit-btn"
+                    onClick={() => onEdit(mechanic)}
                   >
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
                       <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
@@ -84,6 +85,7 @@ function MechanicTable({mechanics}) {
                   <button
                     type="button"
                     className="delete-btn"
+                    onClick={() => onDelete(mechanic.id)}
                   >
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
                       <polyline points="3 6 5 6 21 6" />

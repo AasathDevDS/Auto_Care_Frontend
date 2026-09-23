@@ -1,36 +1,39 @@
-import { useState } from "react";
+import { useState , useEffect } from "react";
 
-function AddMechanic({onClose , onSave}) {
+function AddMechanic({onClose , onSave , initialData}) {
   // initialData இருந்தால் Edit mode (Boolean flag)
-  const isEditMode = false;
+  console.log(initialData.is_available);
+  const isEditMode = Boolean(initialData.is_available);
+  
 
   const [mechanic, setMechanic] = useState({
-    name: "",
-    phone: "",
-    specialization: "",
-    is_available: "",
+    name: initialData?.name || "",
+    phone: initialData?.phone || "",
+    specialization: initialData?.specialization || "",
+    is_available: initialData?.is_available ?? "",
   });
 
   // initialData மாறினால் form state-ஐ sync செய்ய (safety measure)
-  // useEffect(() => {
-  //   if (initialData) {
-  //     setCustomer({
-  //       name: initialData.name || "",
-  //       phone: initialData.phone || "",
-  //       email: initialData.email || "",
-  //       address: initialData.address || "",
-  //     });
-  //   }
-  // }, [initialData]);
+  useEffect(() => {
+    if (initialData) {
+      setMechanic({
+        name: initialData.name || "",
+        phone: initialData.phone || "",
+        specialization: initialData.specialization || "",
+        is_available: initialData.is_available ?? "",
+      });
+    }
+  }, [initialData]);
 
   // Input change handler
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setMechanic((prevValue) => ({
-      ...prevValue,
-      [name]: value,
-    }));
-  }
+function handleChange(event) {
+  const { name, value } = event.target;
+
+  setMechanic((prev) => ({
+    ...prev,
+    [name]: [value],
+  }));
+}
 
   // Form submit handler
   function handleSubmit(event) {
@@ -134,15 +137,19 @@ function AddMechanic({onClose , onSave}) {
             <div className="form-field">
               <label htmlFor="customer-address">Availablity</label>
               <select
-              id="customer-select"
                 name="is_available"
-                value={mechanic.is_available}
-                onChange={handleChange}
-                required>
-                  <option value="">-- Select Mechanic Availability --</option>
-                  <option value="True">Available</option>
-                  <option value="False">Unavailable</option>
-              </select>
+                value={
+                  mechanic.is_available === true
+                    ? "true"
+                    : mechanic.is_available === false
+                    ? "false"
+                    : ""
+                }
+                onChange={handleChange} >
+              <option value="">-- Select Mechanic Availability --</option>
+              <option value="true">Available</option>
+              <option value="false">Unavailable</option>
+            </select>
             </div>
           </div>
 
@@ -167,7 +174,7 @@ function AddMechanic({onClose , onSave}) {
                   <line x1="5" y1="12" x2="19" y2="12" />
                 </svg>
               )}
-              {isEditMode ? "Save Changes" : "Add Customer"}
+              {isEditMode ? "Save Changes" : "Add Mechanic"}
             </button>
           </div>
         </form>

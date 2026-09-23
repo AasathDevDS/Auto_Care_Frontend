@@ -4,6 +4,8 @@ import api from "../../services/AxiosURL"; // உங்கள் axios api insta
 function AddServiceForm({ onClose, onSave, initialData }) {
   // initialData இருந்தால் Edit mode (Boolean flag)
   const isEditMode = Boolean(initialData);
+  console.log(initialData.mechanic);
+
 
   // Dropdown options store செய்ய states
   const [vehicles, setVehicles] = useState([]);
