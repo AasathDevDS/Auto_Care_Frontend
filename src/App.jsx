@@ -2,6 +2,7 @@ import { useState } from "react";
 import Customer from "./pages/Customers/Customer";
 import Vehicle from "./pages/Vehicles/Vehicle";
 import Service from "./pages/Services/Service";
+import SP from "./pages/SpareParts/SpareParts";
 import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Mechanics from "./pages/Mechanics/Mechanics";
@@ -29,6 +30,7 @@ function App() {
           {activeTab === "Vehicles" && <Vehicle />}
           {activeTab === "Services" && <Service />}
           {activeTab === "Mechanics" && <Mechanics />}
+          {activeTab === "Spare Parts" && <SP/>}
         </main>
       </div>
     </div>
