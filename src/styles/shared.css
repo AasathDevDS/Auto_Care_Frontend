@@ -551,7 +551,8 @@
 /* ─── Modal Card ─────────────────────────────────────────────── */
 .modal-card {
   width: 100%;
-  max-width: 480px;
+  max-width: 650px;
+  max-height: 90vh;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
@@ -644,10 +645,12 @@
 
 /* ─── Form Body ──────────────────────────────────────────────── */
 .form-body {
-  padding: 20px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding: 20px;
+  max-height: calc(85vh - 140px);
+  overflow-y: auto;
 }
 
 /* Scrollable variant — for forms with many fields (e.g. Add Service) */
@@ -668,7 +671,12 @@
 .form-field {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
+}
+
+.form-field:first-child,
+.form-field:last-child {
+  grid-column: 1 / -1;
 }
 
 .form-field label {
@@ -800,6 +808,10 @@
 
   /* Stack 2-col form grids on mobile */
   .form-grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .form-body {
     grid-template-columns: 1fr;
   }
 }

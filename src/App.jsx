@@ -6,6 +6,7 @@ import SP from "./pages/SpareParts/SpareParts";
 import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Mechanics from "./pages/Mechanics/Mechanics";
+import Invoices from "./pages/Invoices/Invoices";
 import "./App.css";
 import "./styles/shared.css";
 
@@ -31,6 +32,7 @@ function App() {
           {activeTab === "Services" && <Service />}
           {activeTab === "Mechanics" && <Mechanics />}
           {activeTab === "Spare Parts" && <SP/>}
+          {activeTab === "Invoices" && <Invoices />}
         </main>
       </div>
     </div>
