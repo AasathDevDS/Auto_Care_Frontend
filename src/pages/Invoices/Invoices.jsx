@@ -86,6 +86,11 @@ export default function Invoices() {
     setSelectedInvoice(null);
   };
 
+  const handleOpenEditModal = (invoiceItem) => {
+    setEditingInvoice(invoiceItem);
+    setIsFormOpen(true);
+  };
+
 
     if (isLoading) {
       return <div>Loading spare parts...</div>;

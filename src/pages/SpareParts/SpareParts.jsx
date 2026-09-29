@@ -8,7 +8,8 @@
   import {
     getSpareParts,
     createSparePart,
-    deleteSparePart
+    deleteSparePart,
+    updateSparePart
   } from "./sparePartsService";
 
   import SparePartsTable from "./sparePartsTable";
@@ -42,6 +43,17 @@
       }
     });
 
+    //Edit
+    const updateMutation = useMutation({
+      mutationFn: updateSparePart,
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ["spareParts"]
+        });
+      }
+    }
+    )
+
     // DELETE
     const deleteMutation = useMutation({
       mutationFn: deleteSparePart,
@@ -56,9 +68,26 @@
       part.name.toLowerCase().includes(search.toLowerCase())
     );
 
-    const handleSave = (data) => {
-      createMutation.mutate(data);
-      setIsFormOpen(false);
+    const handleSave = (formData) => {
+      if (editingSparePart) {
+        updateMutation.mutate(
+          { 
+            id: editingSparePart.id, 
+            data: formData 
+          },
+          {
+            onSuccess: () => {
+              handleCloseForm();
+            }
+          }
+        );
+      } else {
+        createMutation.mutate(formData, {
+          onSuccess: () => {
+            handleCloseForm();
+          }
+        });
+      }
     };
 
     const handleDelete = (id) => {
@@ -67,6 +96,7 @@
     };
 
     const handleEdit = (part) => {
+      // console.log(part);
       setEditingSparePart(part);
       setIsFormOpen(true);
     }
