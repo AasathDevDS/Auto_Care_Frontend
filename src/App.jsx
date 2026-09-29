@@ -7,12 +7,13 @@ import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Mechanics from "./pages/Mechanics/Mechanics";
 import Invoices from "./pages/Invoices/Invoices";
+import Dashboard from "./pages/Dashboard/Dashboard";
 import "./App.css";
 import "./styles/shared.css";
 
 function App() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [activeTab , setActiveTab] = useState("Customers");
+  const [activeTab , setActiveTab] = useState("Dashboard");
 
   return (
     <div className={`app-shell${sidebarCollapsed ? " sidebar-is-collapsed" : ""}`}>
@@ -27,6 +28,7 @@ function App() {
         activeTab={activeTab}
         />
         <main className="content">
+          {activeTab === "Dashboard" && <Dashboard />}
           {activeTab === "Customers" && <Customer />}
           {activeTab === "Vehicles" && <Vehicle />}
           {activeTab === "Services" && <Service />}
