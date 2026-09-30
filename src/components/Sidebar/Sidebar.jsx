@@ -1,7 +1,9 @@
 import "./Sidebar.css";
+import { NavLink } from "react-router-dom";
 
 const navItems = [
   {
+    path : "/",
     label: "Dashboard",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -13,6 +15,7 @@ const navItems = [
     ),
   },
   {
+    path : "/customers",
     label: "Customers",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -24,6 +27,7 @@ const navItems = [
     ),
   },
   {
+    path : "/vehicles",
     label: "Vehicles",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -35,6 +39,7 @@ const navItems = [
     ),
   },
   {
+    path : "/mechanics",
     label: "Mechanics",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg">
@@ -46,6 +51,7 @@ const navItems = [
     ),
   },
   {
+    path : "/services",
     label: "Services",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -54,6 +60,7 @@ const navItems = [
     ),
   },
   {
+    path : "/spare-parts",
     label: "Spare Parts",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -64,6 +71,7 @@ const navItems = [
     ),
   },
   {
+    path : "/invoices",
     label: "Invoices",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -95,20 +103,16 @@ function Sidebar({ collapsed , activeTab, setActiveTab }) {
         <p className="menu-label">Main menu</p>
 
         <nav className="sidebar-nav">
-          {navItems.map(({ icon, label }) => (
-            <a
-              href="#"
-              className={activeTab === label ? "active" : ""}
+          {navItems.map(({ icon, label, path }) => (
+            <NavLink
+              to={path}
+              className={({ isActive }) => (isActive ? "active" : "")}
               key={label}
-              onClick={(e) => {
-                e.preventDefault();
-                setActiveTab(label);
-              }}
               title={collapsed ? label : undefined}
             >
               <span className="nav-icon-wrap">{icon}</span>
               <span className="nav-label">{label}</span>
-            </a>
+            </NavLink>
           ))}
         </nav>
       </div>

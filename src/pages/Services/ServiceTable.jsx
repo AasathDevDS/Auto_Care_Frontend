@@ -1,7 +1,7 @@
 const AVATAR_COLORS = 6;
 
 function ServiceTable({services , onEyeView , onDelete , onEdit}){
-  console.log(services);
+  // console.log(services);
   
   if (services.length === 0) {
     return (
