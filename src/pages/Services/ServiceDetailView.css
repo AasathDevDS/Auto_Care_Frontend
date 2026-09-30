@@ -1,88 +1,79 @@
-/* ─── ServiceDetailView — Module-Specific Styles ─────────────── */
-/*
- * All shared modal styles (form-overlay, modal-card, form-header,
- * form-close-btn, form-footer, btn-cancel, btn-submit, status-pill,
- * badge-*, keyframes) have been moved to:
- *   src/styles/shared.css  (imported globally via App.jsx)
- *
- * This file retains only the styles unique to the details view.
- */
-
-/* ─── Wider Modal Modifier ───────────────────────────────────── */
-/* Overrides the default modal-card max-width for the details view */
+/* ─── Service Details Modal Width ────────────────────────────── */
 .service-details-modal {
-  max-width: 580px;
+  max-width: 600px;
+  width: 100%;
 }
 
-/* ─── Details Body ───────────────────────────────────────────── */
-/* Extends .form-body with a max-height + scroll for long content */
-.details-body {
-  padding: 20px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  max-height: 72vh;
+/* ─── Details Body Container ─────────────────────────────────── */
+/* Shared CSS grid-ஐ override செய்ய !important மற்றும் column layout */
+.service-details-modal .details-body {
+  padding: 24px;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px;
+  max-height: 75vh;
   overflow-y: auto;
 }
 
-/* Custom scrollbar for the details body */
-.details-body::-webkit-scrollbar        { width: 5px; }
-.details-body::-webkit-scrollbar-thumb  { background: var(--border); border-radius: 4px; }
+/* Scrollbar */
+.details-body::-webkit-scrollbar {
+  width: 5px;
+}
 
-/* ─── Detail Rows & Grid ─────────────────────────────────────── */
-.detail-row {
+.details-body::-webkit-scrollbar-thumb {
+  background: var(--border, #e2e8f0);
+  border-radius: 4px;
+}
+
+/* ─── Unified Details Grid (No Dividers) ─────────────────────── */
+/* எல்லா detail items-ம் 2 அல்லது 3 சமசீரான columns-ல் பொருந்தும் */
+.details-info-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-  gap: 14px 16px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 18px 20px;
 }
 
 .detail-item {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 .detail-label {
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  color: var(--text-muted, #64748b);
 }
 
 .detail-value {
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 500;
-  color: var(--text-primary);
+  color: var(--text-primary, #0f172a);
   word-break: break-word;
 }
 
 .text-bold {
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--text-primary, #0f172a);
 }
 
-.details-divider {
-  border: none;
-  border-top: 1px solid var(--border);
-  margin: 0;
-}
-
-/* ─── Problem & Notes Text Box ───────────────────────────────── */
+/* ─── Description & Notes Box ────────────────────────────────── */
 .detail-box {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 12px 14px;
+  gap: 8px;
+  background: var(--bg-surface, #f8fafc);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: var(--radius-md, 8px);
+  padding: 14px 16px;
 }
 
 .detail-description {
   margin: 0;
-  font-size: 13px;
-  line-height: 1.55;
-  color: var(--text-secondary);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-secondary, #334155);
   white-space: pre-line;
 }

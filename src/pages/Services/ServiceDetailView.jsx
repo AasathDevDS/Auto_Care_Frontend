@@ -1,9 +1,9 @@
-import "./ServiceDetailView.css"
+import "./ServiceDetailView.css";
 
-function ServiceDetailsView({ service, onClose , onEdit }) {
+function ServiceDetailsView({ service, onClose, onEdit }) {
   if (!service) return null;
 
-  // Status-க்கு தகுந்த Badge class (PENDING, COMPLETED, IN_PROGRESS)
+  // Status-க்குரிய Badge class
   const getStatusBadge = (status) => {
     const s = status?.toUpperCase();
     if (s === "COMPLETED") return "badge-success";
@@ -11,15 +11,15 @@ function ServiceDetailsView({ service, onClose , onEdit }) {
     return "badge-pending";
   };
 
-  // Date format செய்ய
+  // Date formatting
   const formattedDate = service.service_date
     ? new Date(service.service_date).toLocaleDateString("en-GB", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-      })
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    })
     : "N/A";
 
   return (
@@ -29,7 +29,6 @@ function ServiceDetailsView({ service, onClose , onEdit }) {
         <div className="form-header">
           <div className="form-header-left">
             <div className="form-header-icon">
-              {/* Eye / Details Icon */}
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                 <circle cx="12" cy="12" r="3" />
@@ -54,10 +53,9 @@ function ServiceDetailsView({ service, onClose , onEdit }) {
           </button>
         </div>
 
-        {/* Modal Content - Read Only Details */}
+        {/* Modal Body - Dividers இல்லாமல் Clean Details View */}
         <div className="form-body details-body">
-          {/* Top Quick Status & Date */}
-          <div className="detail-row">
+          <div className="details-info-grid">
             <div className="detail-item">
               <span className="detail-label">Status</span>
               <span className={`status-pill ${getStatusBadge(service.status)}`}>
@@ -74,15 +72,12 @@ function ServiceDetailsView({ service, onClose , onEdit }) {
               <span className="detail-label">Service Date</span>
               <span className="detail-value">{formattedDate}</span>
             </div>
-          </div>
 
-          <hr className="details-divider" />
-
-          {/* Costs & Mileage */}
-          <div className="detail-row">
             <div className="detail-item">
               <span className="detail-label">Estimated Cost</span>
-              <span className="detail-value">LKR {Number(service.estimated_cost || 0).toLocaleString()}</span>
+              <span className="detail-value">
+                LKR {Number(service.estimated_cost || 0).toLocaleString()}
+              </span>
             </div>
 
             <div className="detail-item">
@@ -94,26 +89,25 @@ function ServiceDetailsView({ service, onClose , onEdit }) {
 
             <div className="detail-item">
               <span className="detail-label">Mileage at Service</span>
-              <span className="detail-value">{service.mileage_at_service ? `${service.mileage_at_service} km` : "N/A"}</span>
+              <span className="detail-value">
+                {service.mileage_at_service ? `${service.mileage_at_service} km` : "N/A"}
+              </span>
             </div>
-          </div>
 
-          <hr className="details-divider" />
-
-          {/* Mechanic & Vehicle Reference */}
-          <div className="detail-row">
             <div className="detail-item">
               <span className="detail-label">Assigned Mechanic</span>
-              <span className="detail-value">{service.mechanic_name || `ID: ${service.mechanic || "Not Assigned"}`}</span>
+              <span className="detail-value">
+                {service.mechanic_name || `ID: ${service.mechanic || "Not Assigned"}`}
+              </span>
             </div>
 
             <div className="detail-item">
               <span className="detail-label">Vehicle Number</span>
-              <span className="detail-value">{service.vehicle_number || `ID: ${service.vehicle}`}</span>
+              <span className="detail-value">
+                {service.vehicle_number || `ID: ${service.vehicle}`}
+              </span>
             </div>
           </div>
-
-          <hr className="details-divider" />
 
           {/* Problem Description Box */}
           <div className="detail-box">
@@ -123,7 +117,7 @@ function ServiceDetailsView({ service, onClose , onEdit }) {
             </p>
           </div>
 
-          {/* Notes Box */}
+          {/* Internal Notes Box */}
           {service.notes && (
             <div className="detail-box">
               <span className="detail-label">Internal Notes</span>
@@ -132,7 +126,7 @@ function ServiceDetailsView({ service, onClose , onEdit }) {
           )}
         </div>
 
-        {/* Modal Footer Actions */}
+        {/* Modal Footer */}
         <div className="form-footer">
           <button type="button" className="btn-cancel" onClick={onClose}>
             Close

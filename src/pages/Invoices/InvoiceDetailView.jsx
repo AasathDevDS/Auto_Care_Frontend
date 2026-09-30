@@ -3,7 +3,7 @@
 function InvoiceDetailsView({ invoice, onClose, onEdit }) {
   if (!invoice) return null;
 
-  // Payment Status-க்கு தகுந்த Badge class (PAID, PARTIAL, PENDING)
+  // Payment Status-kku thaguntha Badge class (PAID, PARTIAL, PENDING)
   const getStatusBadge = (status) => {
     const s = status?.toUpperCase();
     if (s === "PAID") return "badge-success";
@@ -11,7 +11,7 @@ function InvoiceDetailsView({ invoice, onClose, onEdit }) {
     return "badge-pending";
   };
 
-  // Payment Method format செய்ய
+  // Payment Method format seiyya
   const formatPaymentMethod = (method) => {
     switch (method) {
       case "CARD":
@@ -24,15 +24,15 @@ function InvoiceDetailsView({ invoice, onClose, onEdit }) {
     }
   };
 
-  // Date format செய்ய
+  // Date format seiyya
   const formattedDate = invoice.created_at
     ? new Date(invoice.created_at).toLocaleDateString("en-GB", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-      })
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    })
     : "N/A";
 
   const currency = "LKR";
@@ -75,10 +75,10 @@ function InvoiceDetailsView({ invoice, onClose, onEdit }) {
           </button>
         </div>
 
-        {/* Modal Content - Read Only Details */}
+        {/* Modal Body - Dividers illatha Clean Details Grid */}
         <div className="form-body details-body">
-          {/* Top Quick Status & Date */}
-          <div className="detail-row">
+          <div className="details-info-grid">
+            {/* Status & Method */}
             <div className="detail-item">
               <span className="detail-label">Payment Status</span>
               <span className={`status-pill ${getStatusBadge(invoice.payment_status)}`}>
@@ -95,12 +95,8 @@ function InvoiceDetailsView({ invoice, onClose, onEdit }) {
               <span className="detail-label">Invoice Date</span>
               <span className="detail-value">{formattedDate}</span>
             </div>
-          </div>
 
-          <hr className="details-divider" />
-
-          {/* Charges Breakdown */}
-          <div className="detail-row">
+            {/* Charges Breakdown */}
             <div className="detail-item">
               <span className="detail-label">Service Charge</span>
               <span className="detail-value">
@@ -121,37 +117,31 @@ function InvoiceDetailsView({ invoice, onClose, onEdit }) {
                 - {currency} {Number(invoice.discount || 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}
               </span>
             </div>
-          </div>
 
-          <hr className="details-divider" />
-
-          {/* Final Billing Summary */}
-          <div className="detail-row">
+            {/* Billing Summary */}
             <div className="detail-item">
               <span className="detail-label">Total Amount</span>
-              <span className="detail-value text-bold" style={{ fontSize: "1.1rem" }}>
+              <span className="detail-value text-bold amount-highlight">
                 {currency} {Number(invoice.total_amount || 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}
               </span>
             </div>
 
             <div className="detail-item">
               <span className="detail-label">Paid Amount</span>
-              <span className="detail-value text-success" style={{ fontWeight: 600 }}>
+              <span className="detail-value text-success">
                 {currency} {Number(invoice.paid_amount || 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}
               </span>
             </div>
 
             <div className="detail-item">
               <span className="detail-label">Remaining Balance</span>
-              <span className={`detail-value ${Number(invoice.remaining_amount) > 0 ? "text-danger" : "text-muted"}`} style={{ fontWeight: 600 }}>
+              <span className={`detail-value ${Number(invoice.remaining_amount) > 0 ? "text-danger" : "text-muted"}`}>
                 {currency} {Number(invoice.remaining_amount || 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}
               </span>
             </div>
           </div>
 
-          <hr className="details-divider" />
-
-          {/* Notes Box */}
+          {/* Billing Notes Box */}
           <div className="detail-box">
             <span className="detail-label">Billing Notes</span>
             <p className="detail-description">

@@ -23,7 +23,7 @@ function App() {
         sidebarCollapsed ? " sidebar-is-collapsed" : ""
       }`}
     >
-      <Sidebar />
+      <Sidebar collapsed={sidebarCollapsed} />
 
       <div className="main-area">
         <Navbar
