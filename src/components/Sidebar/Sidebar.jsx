@@ -1,9 +1,9 @@
 import "./Sidebar.css";
-import { NavLink } from "react-router-dom";
+import { NavLink , useNavigate } from "react-router-dom";
 
 const navItems = [
   {
-    path : "/",
+    path : "/dashboard",
     label: "Dashboard",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -85,7 +85,18 @@ const navItems = [
   },
 ];
 
-function Sidebar({ collapsed , activeTab, setActiveTab }) {
+function Sidebar({ collapsed }) {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Clear any authentication tokens or user data here
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("refreshToken");
+
+    // Redirect to the login page
+    navigate("/login" , { replace: true });
+  };
+  
   return (
     <aside className={`sidebar${collapsed ? " sidebar--collapsed" : ""}`}>
 
@@ -126,7 +137,11 @@ function Sidebar({ collapsed , activeTab, setActiveTab }) {
             <p>Admin</p>
           </div>
         </div>
-        <button className="logout-btn" title={collapsed ? "Log out" : undefined}>
+        <button 
+        className="logout-btn" 
+          title={collapsed ? "Log out" : undefined}
+            onClick={handleLogout} >
+
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
             <polyline points="16 17 21 12 16 7"/>
