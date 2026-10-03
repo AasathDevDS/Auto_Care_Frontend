@@ -22,41 +22,6 @@
   gap: 12px;
 }
 
-/* ─── Hamburger / Sandwich Button ────────────────────────────── */
-.hamburger-btn {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  border: none;
-  border-radius: var(--radius-md);
-  background: transparent;
-  cursor: pointer;
-  flex-shrink: 0;
-  transition: background 0.15s ease;
-}
-
-.hamburger-btn:hover {
-  background: var(--border);
-}
-
-.hamburger-btn span {
-  display: block;
-  width: 18px;
-  height: 2px;
-  border-radius: var(--radius-full);
-  background: var(--text-secondary);
-  transition: background 0.15s ease;
-}
-
-.hamburger-btn:hover span {
-  background: var(--text-primary);
-}
-
 /* ─── Breadcrumb ─────────────────────────────────────────────── */
 .topbar-breadcrumb {
   display: flex;

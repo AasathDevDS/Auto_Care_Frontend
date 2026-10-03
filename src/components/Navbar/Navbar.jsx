@@ -1,26 +1,18 @@
 import "./Navbar.css";
 
-function Navbar({ onToggleSidebar , activeTab}) {
+function Navbar({ activeTab }) {
+  // Format the active tab string
+  const formattedTab = activeTab
+    ? activeTab.charAt(0).toUpperCase() + activeTab.slice(1).replace("-", " ")
+    : "Dashboard";
+
   return (
     <header className="topbar">
       <div className="topbar-left">
-        {/* Hamburger / sandwich toggle */}
-        <button
-          className="hamburger-btn"
-          onClick={onToggleSidebar}
-          aria-label="Toggle sidebar"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-
-        <div className="topbar-divider" aria-hidden="true"></div>
-
         <div className="topbar-breadcrumb">
           <span className="topbar-eyebrow">Service Management</span>
           <span className="breadcrumb-sep">/</span>
-          <span className="topbar-page-title">{activeTab} Workspace</span>
+          <span className="topbar-page-title">{formattedTab} Workspace</span>
         </div>
       </div>
 

@@ -85,7 +85,7 @@ const navItems = [
   },
 ];
 
-function Sidebar({ collapsed }) {
+function Sidebar() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -98,7 +98,7 @@ function Sidebar({ collapsed }) {
   };
   
   return (
-    <aside className={`sidebar${collapsed ? " sidebar--collapsed" : ""}`}>
+    <aside className="sidebar">
 
       {/* Brand */}
       <div className="sidebar-brand">
@@ -119,7 +119,6 @@ function Sidebar({ collapsed }) {
               to={path}
               className={({ isActive }) => (isActive ? "active" : "")}
               key={label}
-              title={collapsed ? label : undefined}
             >
               <span className="nav-icon-wrap">{icon}</span>
               <span className="nav-label">{label}</span>
@@ -139,7 +138,6 @@ function Sidebar({ collapsed }) {
         </div>
         <button 
         className="logout-btn" 
-          title={collapsed ? "Log out" : undefined}
             onClick={handleLogout} >
 
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

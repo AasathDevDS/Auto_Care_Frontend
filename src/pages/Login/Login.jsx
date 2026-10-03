@@ -46,21 +46,22 @@ function Login() {
 
   return (
     <div className="login-page">
-      <div className="login-card">
-        {/* Brand */}
-        <div className="login-brand">
-          <div className="login-logo">A</div>
-          <div className="login-brand-text">
-            <h1>AutoCare</h1>
-            <p>Service Management</p>
-          </div>
+      {/* Left Branding Side */}
+      <div className="login-left">
+        <div className="login-left-content">
+          <div className="login-logo-large">A</div>
+          <h1>AutoCare</h1>
+          <p>Streamline your workshop operations with our advanced management system.</p>
         </div>
+      </div>
 
-        {/* Header */}
-        <div className="login-header">
-          <h2>Welcome Back</h2>
-          <p>Sign in to your account</p>
-        </div>
+      {/* Right Form Side */}
+      <div className="login-right">
+        <div className="login-card">
+          <div className="login-header">
+            <h2>Welcome Back</h2>
+            <p>Sign in to your account to continue</p>
+          </div>
 
         {/* Validation Error Area */}
         {error && (
@@ -145,6 +146,7 @@ function Login() {
             )}
           </button>
         </form>
+        </div>
       </div>
     </div>
   );

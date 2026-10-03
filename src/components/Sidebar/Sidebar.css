@@ -3,7 +3,7 @@
   position: fixed;
   inset: 0 auto 0 0;
   z-index: 100;
-  width: 260px;
+  width: 72px; /* Default collapsed width */
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -12,20 +12,20 @@
   box-shadow: 4px 0 24px rgba(0,0,0,0.18);
   overflow-y: auto;
   overflow-x: hidden;
-  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ─── Collapsed ──────────────────────────────────────────────── */
-.sidebar--collapsed {
-  width: 68px;
+/* ─── Expanded State (Hover) ─────────────────────────────────── */
+.sidebar:hover {
+  width: 260px;
 }
 
 /* Hide text when collapsed */
-.sidebar--collapsed .sidebar-brand-text,
-.sidebar--collapsed .menu-label,
-.sidebar--collapsed .nav-label,
-.sidebar--collapsed .sidebar-user-text,
-.sidebar--collapsed .logout-label {
+.sidebar:not(:hover) .sidebar-brand-text,
+.sidebar:not(:hover) .menu-label,
+.sidebar:not(:hover) .nav-label,
+.sidebar:not(:hover) .sidebar-user-text,
+.sidebar:not(:hover) .logout-label {
   opacity: 0;
   width: 0;
   overflow: hidden;
@@ -33,21 +33,31 @@
   pointer-events: none;
 }
 
+/* Show text when hovered */
+.sidebar:hover .sidebar-brand-text,
+.sidebar:hover .menu-label,
+.sidebar:hover .nav-label,
+.sidebar:hover .sidebar-user-text,
+.sidebar:hover .logout-label {
+  opacity: 1;
+  width: auto;
+}
+
 /* Centre icons when collapsed */
-.sidebar--collapsed .sidebar-nav a {
+.sidebar:not(:hover) .sidebar-nav a {
   justify-content: center;
   padding: 10px 0;
 }
-.sidebar--collapsed .sidebar-brand {
+.sidebar:not(:hover) .sidebar-brand {
   justify-content: center;
   padding-left: 0;
   padding-right: 0;
 }
-.sidebar--collapsed .sidebar-user {
+.sidebar:not(:hover) .sidebar-user {
   justify-content: center;
   padding: 10px 0;
 }
-.sidebar--collapsed .logout-btn {
+.sidebar:not(:hover) .logout-btn {
   justify-content: center;
   padding: 9px 0;
 }
@@ -289,18 +299,16 @@
 
 /* ─── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 1024px) {
-  .sidebar { width: 220px; }
-  .sidebar--collapsed { width: 68px; }
+  .sidebar { width: 72px; }
+  .sidebar:hover { width: 220px; }
 }
 
 @media (max-width: 768px) {
   .sidebar {
-    width: 260px;
-    transform: translateX(-100%);
-    transition: width 0.25s cubic-bezier(0.4,0,0.2,1), transform 0.25s cubic-bezier(0.4,0,0.2,1);
+    width: 60px;
   }
-  .sidebar--collapsed {
-    width: 260px;
-    transform: translateX(0);
+  .sidebar:hover {
+    width: 220px;
+    z-index: 1000;
   }
 }

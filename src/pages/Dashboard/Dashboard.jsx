@@ -100,7 +100,7 @@ function Dashboard() {
   };
 
   // Generate Conic Gradient for Donut Chart
-  const donutColors = ["#4F6FD4", "#059669", "#D97706", "#DC2626", "#8B5CF6", "#06B6D4"];
+  const donutColors = ["#4F46E5", "#059669", "#D97706", "#DC2626", "#8B5CF6", "#06B6D4"];
   const totalServices = service_distribution.reduce((acc, curr) => acc + curr.count, 0);
   let conicGradientString = "";
   let currentPercent = 0;

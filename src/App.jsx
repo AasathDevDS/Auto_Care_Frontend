@@ -17,8 +17,6 @@ import "./App.css";
 import "./styles/shared.css";
 
 function App() {
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  
   const location = useLocation();
   const isLoginPage = location.pathname === "/login";
 
@@ -32,11 +30,11 @@ function App() {
   }
 
   return (
-    <div className={`app-shell${sidebarCollapsed ? " sidebar-is-collapsed" : ""}`}>
-      <Sidebar collapsed={sidebarCollapsed} />
+    <div className="app-shell">
+      <Sidebar />
 
       <div className="main-area">
-        <Navbar onToggleSidebar={() => setSidebarCollapsed((prev) => !prev)} />
+        <Navbar activeTab={location.pathname.split('/')[1] || "dashboard"} />
 
         <main className="content">
           <Routes>

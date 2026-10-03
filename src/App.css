@@ -9,16 +9,11 @@
 .main-area {
   flex: 1;
   min-height: 100vh;
-  margin-left: 260px;
+  margin-left: 72px; /* Default collapsed width */
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transition: margin-left 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Collapsed state — driven by class on app-shell */
-.sidebar-is-collapsed .main-area {
-  margin-left: 68px;
+  /* Removed transition to avoid jumpiness if we are just overlaying */
 }
 
 .content {
@@ -30,10 +25,7 @@
 /* ─── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 1024px) {
   .main-area {
-    margin-left: 220px;
-  }
-  .sidebar-is-collapsed .main-area {
-    margin-left: 68px;
+    margin-left: 72px;
   }
   .content {
     padding: 28px 24px 48px;
@@ -42,9 +34,6 @@
 
 @media (max-width: 768px) {
   .main-area {
-    margin-left: 0;
-  }
-  .sidebar-is-collapsed .main-area {
     margin-left: 0;
   }
   .content {

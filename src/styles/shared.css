@@ -89,7 +89,7 @@
 
 .add-btn:hover {
   background: var(--accent-hover);
-  box-shadow: 0 4px 16px rgba(79, 111, 212, 0.32);
+  box-shadow: 0 4px 12px var(--accent-shadow);
   transform: translateY(-1px);
 }
 
