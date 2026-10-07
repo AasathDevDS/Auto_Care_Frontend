@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import api from "../../services/AxiosURL";
 import ServiceTable from "./ServiceTable";
 import ServiceDetailsView from "./ServiceDetailView";
-import AddServiceForm from "./AddService"; // நீங்கள் உருவாக்கிய Add/Edit Form
+import AddServiceForm from "./AddService"; 
+
 
 function Service() {
   const [loading, setLoading] = useState(true);

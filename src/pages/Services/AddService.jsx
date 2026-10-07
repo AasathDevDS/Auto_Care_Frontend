@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import api from "../../services/AxiosURL"; // உங்கள் axios api instance path
+import api from "../../services/AxiosURL"; 
+import ServiceSpareParts from "../ServiceSpare/ServiceSpare";
 
 function AddServiceForm({ onClose, onSave, initialData }) {
   // initialData இருந்தால் Edit mode (Boolean flag)
@@ -9,6 +10,7 @@ function AddServiceForm({ onClose, onSave, initialData }) {
   // Dropdown options store செய்ய states
   const [vehicles, setVehicles] = useState([]);
   const [mechanics, setMechanics] = useState([]);
+  const [isSparePartsOpen, setIsSparePartsOpen] = useState(false);
 
   // Service Form State
   const [formData, setFormData] = useState({
@@ -293,8 +295,14 @@ function AddServiceForm({ onClose, onSave, initialData }) {
 
           {/* Footer Actions */}
           <div className="form-footer">
+            
+
             <button type="button" className="btn-cancel" onClick={onClose}>
               Cancel
+            </button>
+
+            <button type="button" className="btn-submit" onClick={() => setIsSparePartsOpen(true)} >
+             + Add Spare Parts 
             </button>
 
             <button type="submit" className="btn-submit">
@@ -314,6 +322,12 @@ function AddServiceForm({ onClose, onSave, initialData }) {
               )}
               {isEditMode ? "Save Changes" : "Create Service"}
             </button>
+
+            {isSparePartsOpen && (
+              <ServiceSpareParts
+                onClose={() => setIsSparePartsOpen(false)}
+              />
+            )}
           </div>
         </form>
       </div>

@@ -26,13 +26,9 @@ function Customer() {
 
   // 1. Initial Data Fetch
   useEffect(() => {
-  const token = localStorage.getItem("authToken"); // Token-ஐ எடுக்கிறோம்
+  // const token = localStorage.getItem("authToken"); // Token-ஐ எடுக்கிறோம்
 
-  api.get("customers/", {
-    headers: {
-      Authorization: `Bearer ${token}`, // Header-ல் Bearer token சேர்க்கிறோம்
-    },
-  })
+  api.get("customers/")
     .then((response) => {
       setCustomers(response.data);
       setLoading(false);

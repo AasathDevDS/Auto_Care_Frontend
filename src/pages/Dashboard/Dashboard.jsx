@@ -10,6 +10,8 @@ function Dashboard() {
   const [error, setError] = useState(null);
 
   const fetchDashboardData = () => {
+    
+
     setLoading(true);
     setError(null);
     api.get("dashboard/")
