@@ -323,13 +323,16 @@ function AddServiceForm({ onClose, onSave, initialData }) {
               {isEditMode ? "Save Changes" : "Create Service"}
             </button>
 
-            {isSparePartsOpen && (
-              <ServiceSpareParts
-                onClose={() => setIsSparePartsOpen(false)}
-              />
-            )}
+            
           </div>
         </form>
+
+        {isSparePartsOpen && (
+              <ServiceSpareParts
+                serviceId={initialData?.id}
+                onClose={() => setIsSparePartsOpen(false)}
+              />
+        )}
       </div>
     </div>
   );
