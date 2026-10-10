@@ -54,7 +54,7 @@ export default function ServiceSpare({ onClose, serviceId }) {
 
   // Form submission with backend API call and validation
   async function handleSubmit(event) {
-    console.log(formData);
+    // console.log(A);
     
     event.preventDefault();
     setError(null);
@@ -68,14 +68,14 @@ export default function ServiceSpare({ onClose, serviceId }) {
     setLoading(true);
 
     try {
-      console.log(formData);
+      // console.log(formData);
       await api.post("service-spare-parts/", {
         service: serviceId,
         spare_part_name: Number(formData.spare_part),
         quantity: Number(formData.quantity),
         unit_price: Number(formData.unit_price),
       });
-      console.log(formData);
+      // console.log(formData);
       onClose();
     } catch (err) {
       console.error("Error submitting spare part:", err);

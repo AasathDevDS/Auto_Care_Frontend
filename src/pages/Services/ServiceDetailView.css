@@ -77,3 +77,75 @@
   color: var(--text-secondary, #334155);
   white-space: pre-line;
 }
+
+/* Spare parts wrapper card */
+.spares-detail-box {
+  padding: 16px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  margin-top: 16px;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 10px;
+}
+
+/* Table layout */
+.spares-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.spares-table th {
+  background-color: #f1f5f9;
+  color: #64748b;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.spares-table td {
+  padding: 12px 14px;
+  color: #334155;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.spares-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.spares-table tbody tr:hover {
+  background-color: #f1f5f9;
+  transition: background 0.15s ease-in-out;
+}
+
+/* Typography & Alignment */
+.part-name {
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-bold {
+  font-weight: 600;
+}
+
+.empty-text {
+  margin-top: 8px;
+  color: #94a3b8;
+  font-style: italic;
+}

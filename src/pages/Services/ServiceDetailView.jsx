@@ -1,8 +1,14 @@
+import api from "../../services/AxiosURL";
 import "./ServiceDetailView.css";
+import { useEffect, useState } from "react";
 
 function ServiceDetailsView({ service, onClose, onEdit }) {
   if (!service) return null;
+  const [usedSpares , setUsedSpares] = useState([]);
 
+  const filtereduserSpare = usedSpares.filter((usedSpare) => usedSpare.service === service.id);
+  
+  
   // Status-க்குரிய Badge class
   const getStatusBadge = (status) => {
     const s = status?.toUpperCase();
@@ -10,6 +16,17 @@ function ServiceDetailsView({ service, onClose, onEdit }) {
     if (s === "IN_PROGRESS") return "badge-warning";
     return "badge-pending";
   };
+
+  useEffect(() => {
+    api.get("service-spare-parts/")
+    .then((response) => {
+      setUsedSpares(response.data);
+      console.log(response.data);
+    })
+    .catch ((err) => {
+      console.error("API error" , err);
+    })
+  }, []);
 
   // Date formatting
   const formattedDate = service.service_date
@@ -124,6 +141,45 @@ function ServiceDetailsView({ service, onClose, onEdit }) {
               <p className="detail-description">{service.notes}</p>
             </div>
           )}
+        {/* Used Spare Parts Section */}
+          <div className="detail-box spares-detail-box">
+            <span className="detail-label">Used Spare Parts</span>
+            
+            {filtereduserSpare.length > 0 ? (
+              <div className="table-responsive">
+                <table className="spares-table">
+                  <thead>
+                    <tr>
+                      <th>Part Name</th>
+                      <th className="text-center">Used Qty</th>
+                      <th className="text-right">Unit Price</th>
+                      <th className="text-right">Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filtereduserSpare.map((spare) => {
+                      const qty = Number(spare.quantity || 0);
+                      const price = Number(spare.unit_price || 0);
+                      const total = qty * price;
+
+                      return (
+                        <tr key={spare.id}>
+                          <td className="part-name">
+                            {spare.spare_part_name || `Part #${spare.spare_part || spare.id}`}
+                          </td>
+                          <td className="text-center">{qty}</td>
+                          <td className="text-right">LKR {price.toLocaleString()}</td>
+                          <td className="text-right text-bold">LKR {total.toLocaleString()}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <p className="detail-description empty-text">No spare parts recorded for this service.</p>
+            )}
+          </div>
         </div>
 
         {/* Modal Footer */}
@@ -131,6 +187,8 @@ function ServiceDetailsView({ service, onClose, onEdit }) {
           <button type="button" className="btn-cancel" onClick={onClose}>
             Close
           </button>
+
+          
 
           {onEdit && (
             <button
